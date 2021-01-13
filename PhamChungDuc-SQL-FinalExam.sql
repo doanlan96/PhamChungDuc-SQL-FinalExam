@@ -91,19 +91,14 @@ END$$
 DELIMITER ; 
 
 -- question 5
-DROP PROCEDURE IF EXISTS SubjectUpdateID;
+DROP PROCEDURE IF EXISTS DeleteStudentByName;
 DELIMITER $$
-CREATE PROCEDURE SubjectUpdateID(IN in_student_name VARCHAR(50))
+CREATE PROCEDURE DeleteStudentByName(IN in_student_name VARCHAR(50))
 BEGIN
 IF in_student_name = '*'
-THEN DELETE FROM Student; 
-DELETE FROM StudentSubject; 
+THEN DELETE FROM Student;
 ELSE
 DELETE FROM Student WHERE StudentName = in_student_name;
-DELETE FROM StudentSubject WHERE StudentID = (SELECT StudentID
-											   FROM Student
-                                               WHERE StudentName = in_student_name);
 END IF;
 END $$
-DELIMITER ;	
-                    
+DELIMITER ;
